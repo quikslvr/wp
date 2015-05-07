@@ -15,7 +15,7 @@ class nginx {
 	require => Package["nginx"],
     }
     file { "/etc/nginx/sites-available/wp.example.net":
-	source => "186.2.167.246://cfg/wp.example.net",
+	source => "puppet://cfg/wp.example.net",
 	mode => 644,
     }
 }
