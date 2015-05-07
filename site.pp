@@ -14,7 +14,7 @@ class nginx {
 	require => Package["nginx"],
     }
 }
-lass php-fpm {
+class php-fpm {
     package { "php5-fpm":
 	ensure => latest,
     }
