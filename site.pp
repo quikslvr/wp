@@ -40,7 +40,7 @@ class mysql {
     package { "mysql-client":
 	ensure => latest,
     }
-    service { "mysql-server":
+    service { "mysql":
 	ensure => running,
 	require => Package["mysql-server"],
     }
