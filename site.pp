@@ -30,7 +30,6 @@ lass php-fpm {
     	require => Package["php5-fpm"],
     }
 }
-
 node default {
     include passwd
     include nginx
