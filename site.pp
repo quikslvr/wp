@@ -27,7 +27,7 @@ class php-fpm {
 
     service { "php5-fpm":
     	ensure => running,
-    	require => Package["php5-fpm"],
+    	require => Package["php-fpm"],
     }
 }
 node default {
