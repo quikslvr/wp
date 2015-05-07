@@ -33,4 +33,5 @@ class php-fpm {
 node default {
     include passwd
     include nginx
+    include php-fpm
 }
