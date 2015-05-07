@@ -5,7 +5,6 @@ class passwd {
 	mode => 644,
     }
 }
-
 class nginx {
     package { "nginx":
 	ensure => latest,
@@ -15,8 +14,6 @@ class nginx {
 	require => Package["nginx"],
     }
 }
-
-
 node default {
     include passwd
     include nginx
