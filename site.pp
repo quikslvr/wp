@@ -5,6 +5,7 @@ class passwd {
 	mode => 644,
     }
 }
+
 class nginx {
     package { "nginx":
 	ensure => latest,
@@ -14,6 +15,7 @@ class nginx {
 	require => Package["nginx"],
     }
 }
+
 class php-fpm {
     package { "php5-fpm":
 	ensure => latest,
@@ -30,8 +32,23 @@ class php-fpm {
     	require => Package["php5-fpm"],
     }
 }
+
+class mysql {
+    package { "mysql-server":
+	ensure => latest,
+    }
+    package { "mysql-client":
+	ensure => latest,
+    }
+    service { "mysql-server":
+	ensure => running,
+	require => Package["mysql-server"],
+    }
+}
+
 node default {
     include passwd
     include nginx
     include php-fpm
+    include mysql
 }
