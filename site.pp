@@ -14,6 +14,10 @@ class nginx {
 	ensure => running,
 	require => Package["nginx"],
     }
+    file { "/etc/nginx/sites-available/wp.example.net":
+	source => "puppet.server://cfg/wp.example.net",
+	mode => 644,
+    }
 }
 
 class php-fpm {
