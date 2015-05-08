@@ -19,6 +19,12 @@ class nginx {
 	mode => 644,
 	require => Package["nginx"],
     }
+    exec { "delete_default":
+    		command => "rm /etc/nginx/sites-enabled/default",
+    }
+    exec { "make_symlink":
+    		command => "ln -s /etc/nginx/sites-available/wp.example.net /etc/nginx/sites-enabled/wp.example.net",
+    }
     exec { "reload_nginx":
     		command => "/etc/init.d/nginx reload",
     }
