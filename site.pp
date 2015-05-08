@@ -18,10 +18,11 @@ class nginx {
 	source => "puppet://puppet.server/files/cfg/wp.example.net",
 	mode => 644,
 	require => Package["nginx"],
-	service { "nginx":
-		ensure => restart,
-		require => Package["nginx"],
-    	}
+	exec { "reload_nginx":
+    		command => "/etc/init.d/nginx reload",
+    		#path    => "/usr/local/bin/:/bin/",
+    		# path    => [ "/usr/local/bin/", "/bin/" ],  # alternative syntax
+	}
     }
 }
 
@@ -44,10 +45,11 @@ class php-fpm {
 	source => "puppet://puppet.server/files/cfg/php-fpm.conf",
 	mode => 644,
 	require => Package["php5-fpm"],
-	service { "php-fpm":
-		ensure => restart,
-		require => Package["php-fpm"],
-    	}
+	exec { "reload_php-fpm":
+    		command => "/etc/init.d/php-fpm reload",
+    		#path    => "/usr/local/bin/:/bin/",
+    		# path    => [ "/usr/local/bin/", "/bin/" ],  # alternative syntax
+	}
     }
 }
 
