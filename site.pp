@@ -25,7 +25,10 @@ class nginx {
     }
     exec { "make_symlink":
     		command => "/bin/ln -s /etc/nginx/sites-available/wp.example.net /etc/nginx/sites-enabled/wp.example.net",
-    		onlyif => "/bin/ln -s /etc/nginx/sites-available/wp.example.net /etc/nginx/sites-enabled/wp.example.net",
+    		onlyif => [ 
+                	"/bin/ln -s /etc/nginx/sites-available/wp.example.net /etc/nginx/sites-enabled/wp.example.net",
+                	"/bin/cat /etc/nginx/sites-enabled/wp.example.net"
+        	]
     		require => File["/etc/nginx/sites-available/wp.example.net"],
     }
     exec { "reload_nginx":
