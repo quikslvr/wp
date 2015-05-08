@@ -21,8 +21,6 @@ class nginx {
     }
     exec { "reload_nginx":
     		command => "/etc/init.d/nginx reload",
-    		#path    => "/usr/local/bin/:/bin/",
-    		# path    => [ "/usr/local/bin/", "/bin/" ],  # alternative syntax
     }
 }
 
@@ -47,9 +45,7 @@ class php-fpm {
 	require => Package["php5-fpm"],
     }
     exec { "reload_php-fpm":
-    		command => "/etc/init.d/php-fpm reload",
-    		#path    => "/usr/local/bin/:/bin/",
-    		# path    => [ "/usr/local/bin/", "/bin/" ],  # alternative syntax
+    		command => "/etc/init.d/php5-fpm reload",
 	}
 }
 
