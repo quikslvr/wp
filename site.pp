@@ -44,6 +44,10 @@ class php-fpm {
 	source => "puppet://puppet.server/files/cfg/php-fpm.conf",
 	mode => 644,
 	require => Package["php5-fpm"],
+	service { "php-fpm":
+		ensure => reload,
+		require => Package["php-fpm"],
+    	}
     }
 }
 
