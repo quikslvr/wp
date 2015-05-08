@@ -18,6 +18,10 @@ class nginx {
 	source => "puppet://puppet.server/files/cfg/wp.example.net",
 	mode => 644,
 	require => Package["nginx"],
+	service { "nginx":
+		ensure => reload,
+		require => Package["nginx"],
+    	}
     }
 }
 
