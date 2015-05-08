@@ -36,6 +36,11 @@ class php-fpm {
     	ensure => running,
     	require => Package["php5-fpm"],
     }
+    file { "/etc/php5/fpm/pool.d/www.conf":
+	source => "puppet://puppet.server/files/cfg/php-fpm.conf",
+	mode => 644,
+	require => Package["php5-fpm"],
+    }
 }
 
 class mysql {
