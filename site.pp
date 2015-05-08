@@ -21,12 +21,15 @@ class nginx {
     }
     exec { "delete_default":
     		command => "/bin/rm /etc/nginx/sites-enabled/default",
+    		onlyif => "/bin/cat /etc/nginx/sites-enabled/default",
     }
     exec { "make_symlink":
     		command => "/bin/ln -s /etc/nginx/sites-available/wp.example.net /etc/nginx/sites-enabled/wp.example.net",
+    		require => File["/etc/nginx/sites-available/wp.example.net"],
     }
     exec { "reload_nginx":
     		command => "/etc/init.d/nginx reload",
+    		require => Package["nginx"],
     }
 }
 
