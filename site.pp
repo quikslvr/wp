@@ -19,7 +19,7 @@ class nginx {
 	mode => 644,
 	require => Package["nginx"],
 	service { "nginx":
-		ensure => reload,
+		ensure => restart,
 		require => Package["nginx"],
     	}
     }
@@ -45,7 +45,7 @@ class php-fpm {
 	mode => 644,
 	require => Package["php5-fpm"],
 	service { "php-fpm":
-		ensure => reload,
+		ensure => restart,
 		require => Package["php-fpm"],
     	}
     }
