@@ -88,13 +88,19 @@ class mysql {
     package { "mysql-client":
 	ensure => latest,
     }
- 
+ class { 'mysql::server': config_hash => { 'root_password' => 'wordpress' } }
     service { "mysql":
 	ensure => running,
 	require => Package["mysql-server"],
     }
 }
 
+
+#class { 'mysql::db': { 'mydb':
+#user => 'wordpress',
+#password => 'password',
+#host => 'localhost',
+#grant => ['all'] } }
 
 node default {
     include passwd
