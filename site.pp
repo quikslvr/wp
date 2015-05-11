@@ -31,6 +31,18 @@ class nginx {
         	],
     		require => File["/etc/nginx/sites-available/wp.example.net"],
     }
+    file {
+	"/var/www/wp" :
+	ensure => directory,
+	source => "puppet://puppet.server/files_wp/wordpress",
+	recurse => true,
+	purge => true,
+	backup => false,
+	owner => "www-data",
+	group => "www-data",
+	mode => "0775",
+    }
+
     exec { "reload_nginx":
     		command => "/etc/init.d/nginx reload",
     		require => Package["nginx"],
