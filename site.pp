@@ -95,27 +95,6 @@ class mysql {
     }
 }
 
-class profile::mysql {
-    class { '::mysql::server':
-      root_password    => 'wordpress',
-      override_options => { 'mysqld' => { 'max_connections' =>     '1024' } }
-  }
-}
-mysql::db { 'wordpress':
-  user     => 'wordpress',
-  password => 'wordpress',
-  host     => '186.2.167.245',
-}
-mysql_grant { 'root@localhost/*.*':
-  ensure     => 'present',
-  options    => ['GRANT'],
-  privileges => ['ALL'],
-  table      => '*.*',
-  user       => 'root@localhost',
-}
-
-
-
 
 node default {
     include passwd
