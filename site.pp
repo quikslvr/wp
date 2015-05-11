@@ -32,6 +32,13 @@ class nginx {
     		require => File["/etc/nginx/sites-available/wp.example.net"],
     }
     file {
+    	"/var/www" :
+    	ensure => directory,
+    	owner => "www-data",
+	group => "www-data",
+	mode => "0775",
+    }
+    file {
 	"/var/www/wp" :
 	ensure => directory,
 	source => "puppet://puppet.server/files/wp_files/wordpress",
