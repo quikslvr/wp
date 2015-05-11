@@ -88,12 +88,12 @@ class mysql {
     package { "mysql-client":
 	ensure => latest,
     }
-    mysql::db { 'wordpress':
-  	user     => 'wordpress',
-  	password => 'wordpress',
-  	host     => 'localhost',
-  	grant    => ['SELECT', 'UPDATE'],
-    }
+    #mysql::db { 'wordpress':
+  #	user     => 'wordpress',
+  #	password => 'wordpress',
+  #	host     => 'localhost',
+  #	grant    => ['SELECT', 'UPDATE'],
+   # }
     service { "mysql":
 	ensure => running,
 	require => Package["mysql-server"],
