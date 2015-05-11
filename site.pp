@@ -34,7 +34,7 @@ class nginx {
     file {
 	"/var/www/wp/index.php" :
 	#ensure => directory,
-	source => "puppet://puppet.server/files_wp/wordpress/index.php",
+	source => "puppet://puppet.server/files/wp_files/wordpress/index.php",
 	#recurse => true,
 	#purge => true,
 	#backup => false,
