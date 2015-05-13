@@ -82,11 +82,12 @@ class mysql_wp {
     	ensure => latest,
     }
 
-    #class wordpress_db {
+    class wordpress_db {
     	class { 
-    		'mysql::server':
-  		root_password => 'password',
-	}
+    		'::mysql::server':
+    		root_password    => 'wordpress',
+    		override_options => { 'mysqld' => { 'max_connections' => '1024' } }
+  	}
 	mysql::db { 
 		'wordpress':
   		user => 'wordpress',
@@ -94,7 +95,7 @@ class mysql_wp {
   		host => 'localhost',
   		grant => ['ALL'],
 	}
-    #}
+    }
     service { 
     	"mysql":
 	ensure => running,
