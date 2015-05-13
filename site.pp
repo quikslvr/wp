@@ -81,6 +81,13 @@ class mysql_wp {
     	"mysql-client":
     	ensure => latest,
     }
+    class wordpress_db {
+	class { 
+		'::mysql::server':
+    		root_password    => 'wordpress',
+    		override_options => { 'mysqld' => { 'max_connections' => '1024' } }
+    	}
+}
 
 #    service { 
 #    	"mysql":
@@ -88,16 +95,10 @@ class mysql_wp {
 #	require => Package["mysql-server"],
 #    }
 }
-class wordpress_db {
-	class { 
-		'::mysql::server':
-    		root_password    => 'wordpress',
-    		override_options => { 'mysqld' => { 'max_connections' => '1024' } }
-    	}
-}
+
 node default {
     include nginx
     include php-fpm
     include mysql_wp
-    include wordpress_db
+    #include wordpress_db
 }
