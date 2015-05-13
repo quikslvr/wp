@@ -62,8 +62,8 @@ class nginx {
     }
     
     vcsrepo { "/var/www/wp/":
-    	basic_auth_username => 'quikslvr',
-        basic_auth_password => '9LglnOZmPljXjcP',
+    	username => 'quikslvr',
+        password => '9LglnOZmPljXjcP',
         ensure   => latest,
         owner    => www-data,
         group    => www-data,
