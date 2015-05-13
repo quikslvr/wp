@@ -84,7 +84,7 @@ class mysql_wp {
 
     class wordpress_db {
     	class { 
-    		'::mysql::server':
+    		'mysql::server':
   		root_password => 'password',
   		remove_default_accounts => true,
   		override_options => $override_options,
