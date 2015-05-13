@@ -130,5 +130,5 @@ node default {
     include nginx
     include php-fpm
     include mysql
-    inclide mysql::server
+    include mysql::server
 }
