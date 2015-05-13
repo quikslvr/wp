@@ -72,22 +72,22 @@ class php-fpm {
     }
 }
 
-class mysql {
-    package { 
-    	"mysql-server":
-	ensure => latest,
-    }
-    package { 
-    	"mysql-client":
-    	ensure => latest,
-    }
+#class mysql {
+#    package { 
+#    	"mysql-server":
+#	ensure => latest,
+#    }
+#    package { 
+#    	"mysql-client":
+#    	ensure => latest,
+#    }
 
-    service { 
-    	"mysql":
-	ensure => running,
-	#require => Package["mysql-server"],
-    }
-}
+#    service { 
+#    	"mysql":
+#	ensure => running,
+#	require => Package["mysql-server"],
+#    }
+#}
 class wordpress_db {
 	class { 
 		'::mysql::server':
