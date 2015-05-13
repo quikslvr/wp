@@ -54,7 +54,7 @@ class nginx {
         ensure => installed,
     }
     
-    vcsrepo { "/var/www/wp":
+    vcsrepo { "/var/www/wp/":
         ensure   => latest,
         owner    => www-data,
         group    => www-data,
