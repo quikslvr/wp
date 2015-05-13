@@ -86,13 +86,14 @@ class mysql_wp {
     	class { 
     		'mysql::server':
   		root_password => 'password',
-	}
-	mysql::db { 
-		'wordpress':
-  		user     => 'wordpress',
-  		password => 'wordpress',
-  		host     => 'localhost',
-  		grant    => ['ALL'],
+	
+		mysql::db { 
+			'wordpress':
+  			user     => 'wordpress',
+  			password => 'wordpress',
+  			host     => 'localhost',
+  			grant    => ['ALL'],
+		}
 	}
     }
     service { 
