@@ -98,6 +98,6 @@ class wordpress_db {
 node default {
     include nginx
     include php-fpm
-    include mysql
+    #include mysql
     include wordpress_db
 }
