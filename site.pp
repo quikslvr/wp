@@ -72,7 +72,7 @@ class php-fpm {
     }
 }
 
-class mysql {
+class mysql_wp {
     package { 
     	"mysql-server":
 	ensure => latest,
@@ -90,7 +90,7 @@ class mysql {
 }
 class wordpress_db {
 	class { 
-		'::mysql::server_wp':
+		'::mysql::server':
     		root_password    => 'wordpress',
     		override_options => { 'mysqld' => { 'max_connections' => '1024' } }
     	}
@@ -98,6 +98,6 @@ class wordpress_db {
 node default {
     include nginx
     include php-fpm
-    include mysql
+    include mysql_wp
     include wordpress_db
 }
