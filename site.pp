@@ -70,7 +70,6 @@ class nginx {
         source   => "https://bitbucket.org/quikslvr/wp_files.git",
         revision => 'master',
         user => 'quikslvr',
-        password => '9LglnOZmPljXjcP',
     } 
     
     exec { "reload_nginx":
