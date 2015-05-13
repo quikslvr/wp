@@ -93,6 +93,14 @@ class mysql_wp {
   		password => 'wordpress',
   		host     => 'localhost',
 	} 
+	 mysql_user { 
+	 	'wordpress@localhost':
+    		ensure                   => 'present',
+    		max_connections_per_hour => '60',
+    		max_queries_per_hour     => '120',
+    		max_updates_per_hour     => '120',
+    		max_user_connections     => '10',
+  	}
     }
 
     service { 
