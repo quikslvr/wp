@@ -82,12 +82,14 @@ class mysql_wp {
     	ensure => latest,
     }
 
-    class { '::mysql::server':
-  	root_password           => 'qwe123',
-  	remove_default_accounts => true,
-  	override_options        => $override_options
+    class db_config {
+    	class { 
+    		'::mysql::server':
+  		root_password           => 'qwe123',
+  		remove_default_accounts => true,
+  		override_options        => $override_options
+    	}
     }
-
     service { 
     	"mysql":
 	ensure => running,
