@@ -87,13 +87,19 @@ class mysql_wp {
     		root_password    => 'wordpress',
     		override_options => { 'mysqld' => { 'max_connections' => '1024' } }
     	}
-}
+    	mysql::db { 
+    		'mydb':
+  		user     => 'wordpress',
+  		password => 'wordpress',
+  		host     => 'localhost',
+	} 
+    }
 
-#    service { 
-#    	"mysql":
-#	ensure => running,
-#	require => Package["mysql-server"],
-#    }
+    service { 
+    	"mysql":
+	ensure => running,
+	require => Package["mysql-server"],
+    }
 }
 
 node default {
