@@ -39,6 +39,13 @@ class nginx {
 	group => "www-data",
 	mode => "0775",
     }
+    file {
+    	"/var/www/wp" :
+    	ensure => directory,
+    	owner => "www-data",
+	group => "www-data",
+	mode => "0775",
+    }
     #file {
 #	"/var/www/wp" :
 #	ensure => directory,
