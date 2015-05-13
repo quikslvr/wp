@@ -88,8 +88,8 @@ class mysql_wp {
     		override_options => { 'mysqld' => { 'max_connections' => '1024' } }
     	}
     	mysql::db { 
-    		'statedb':
-    		user     => 'root',
+    		'wordpress':
+    		user     => 'wordpress',
     		password => 'wordpress',
     		host     => 'localhost',
     		#sql        => '/tmp/states.sql',
