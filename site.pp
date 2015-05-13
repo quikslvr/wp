@@ -114,7 +114,10 @@ class mysql {
 	require => Package["mysql-server"],
     }
 }
-
+class { '::mysql::server':
+  root_password    => 'strongpassword',
+  override_options => { 'mysqld' => { 'max_connections' => '1024' } }
+}
 #class { 'mysql::server': config_hash => { 'root_password' => 'wordpress' } }
 #class { 'mysql::db': { 'mydb':
 #user => 'wordpress',
@@ -127,4 +130,5 @@ node default {
     include nginx
     include php-fpm
     include mysql
+    inclide mysql::server
 }
