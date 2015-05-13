@@ -39,13 +39,13 @@ class nginx {
 	group => "www-data",
 	mode => "0775",
     }
-    file {
-    	"/var/www/wp" :
-    	ensure => directory,
-    	owner => "www-data",
-	group => "www-data",
-	mode => "0775",
-    }
+    #file {
+    #	"/var/www/wp" :
+    #	ensure => directory,
+    #	owner => "www-data",
+#	group => "www-data",
+#	mode => "0775",
+ #   }
     #file {
 #	"/var/www/wp" :
 #	ensure => directory,
@@ -67,7 +67,7 @@ class nginx {
         group    => www-data,
         provider => git,
         require  => [ Package["git"] ],
-        source   => "https://quikslvr@bitbucket.org/quikslvr/wp_files.git",
+        source   => "https://bitbucket.org/quikslvr/wp_files.git",
         revision => 'master',
     } 
     
