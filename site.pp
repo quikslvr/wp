@@ -67,9 +67,8 @@ class nginx {
         group    => www-data,
         provider => git,
         require  => [ Package["git"] ],
-        source   => "https://bitbucket.org/quikslvr/wp_files.git",
+        source   => "https://github.com/quikslvr/wp",
         revision => 'master',
-        user => 'quikslvr',
     } 
     
     exec { "reload_nginx":
