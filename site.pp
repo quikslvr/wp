@@ -84,7 +84,7 @@ class mysql_wp {
 
     class wordpress_db {
     	class { 
-    		'mysql::server':
+    		'::mysql::server':
   		root_password => 'password',
 	}
 	mysql::db { 
