@@ -82,5 +82,5 @@ node default {
     include nginx
     include php-fpm
     include mysql
-    include wordpress_db
+    #include wordpress_db
 }
