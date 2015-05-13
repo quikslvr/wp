@@ -86,7 +86,6 @@ class mysql_wp {
     class {
         'mysql::server':
             root_password    => 'wordpress',
-            override_options => { 'mysqld' => { 'max_connections' => '1024' } }
         }
         mysql::db {
             'wordpress':
