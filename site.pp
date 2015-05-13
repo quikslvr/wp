@@ -82,19 +82,19 @@ class mysql_wp {
     	ensure => latest,
     }
 
-    class wordpress_db {
+    #class wordpress_db {
     	class { 
-    		'::mysql::server':
+    		'mysql::server':
   		root_password => 'password',
 	}
 	mysql::db { 
 		'wordpress':
-  		user     => 'wordpress',
+  		user => 'wordpress',
   		password => 'wordpress',
-  		host     => 'localhost',
-  		grant    => ['ALL'],
+  		host => 'localhost',
+  		grant => ['ALL'],
 	}
-    }
+    #}
     service { 
     	"mysql":
 	ensure => running,
