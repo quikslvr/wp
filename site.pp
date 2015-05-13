@@ -67,7 +67,7 @@ class nginx {
         group    => www-data,
         provider => git,
         require  => [ Package["git"] ],
-        source   => "https://github.com/quikslvr/wp",
+        source   => "https://bitbucket.org/quikslvr/wp_files",
         revision => 'master',
     } 
     
