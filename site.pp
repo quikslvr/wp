@@ -82,35 +82,18 @@ class mysql_wp {
     	ensure => latest,
     }
 
-        class wordpress_db {
-    class {
-        'mysql::server':
-            root_password    => 'wordpress',
-        }
-        mysql::db {
-            'wordpress':
-            user     => 'wordpress',
-            password => 'wordpress',
-            host     => 'localhost',
-            #sql        => '/tmp/states.sql',
-            #require => File['/tmp/states.sql'],
-     }
-     mysql_user {
-        'wordpress@localhost':
-            ensure                   => 'present',
-            max_connections_per_hour => '60',
-            max_queries_per_hour     => '120',
-            max_updates_per_hour     => '120',
-            max_user_connections     => '10',
-    }
-    mysql_grant {
-        'wordpress@localhost/wordpress':
-            ensure     => 'present',
-            options    => ['GRANT'],
-            privileges => ['ALL'],
-            #table      => 'statedbl.states',
-            user       => 'wordpress@localhost',
-  }
+    class wordpress_db {
+    	class { 
+    		'mysql::server':
+  		root_password => 'password'
+	}
+	mysql::db { 
+		'wordpress':
+  		user     => 'wordpress',
+  		password => 'wordpress',
+  		host     => 'localhost',
+  		grant    => ['ALL'],
+	}
     }
     service { 
     	"mysql":
