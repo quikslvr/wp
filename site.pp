@@ -13,12 +13,16 @@ class nginx {
     service { "nginx":
 	ensure => running,
 	require => Package["nginx"],
+	restart => "/etc/init.d/nginx reload",
     }
+ 
     file { "/etc/nginx/sites-available/default":
 	source => "puppet://puppet.server/files/cfg/wp.example.net",
 	mode => 644,
 	require => Package["nginx"],
+	notify  => Service["nginx"],
     }
+    
     #exec { "delete_default":
     #		command => "/bin/rm /etc/nginx/sites-enabled/default",
     #		onlyif => "/bin/cat /etc/nginx/sites-enabled/default",
