@@ -75,10 +75,6 @@ class nginx {
         revision => 'master',
     } 
     
-    exec { "reload_nginx":
-    		command => "/etc/init.d/nginx reload",
-    		require => Package["nginx"],
-    }
 }
 
 class php-fpm {
@@ -95,15 +91,14 @@ class php-fpm {
     service { "php5-fpm":
     	ensure => running,
     	require => Package["php5-fpm"],
+    	restart => "/etc/init.d/php5-fpm reload",
     }
     file { "/etc/php5/fpm/pool.d/www.conf":
 	source => "puppet://puppet.server/files/cfg/php-fpm.conf",
 	mode => 644,
 	require => Package["php5-fpm"],
+	notify  => Service["php5-fpm"],
     }
-    exec { "reload_php-fpm":
-    		command => "/etc/init.d/php5-fpm reload",
-	}
 }
 
 class mysql {
