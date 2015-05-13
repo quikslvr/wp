@@ -31,6 +31,7 @@ class nginx {
     #    	],
     #		require => File["/etc/nginx/sites-available/wp.example.net"],
     #}
+
     file {
     	"/var/www" :
     	ensure => directory,
