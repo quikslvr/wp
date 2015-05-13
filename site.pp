@@ -114,21 +114,47 @@ class mysql {
 	require => Package["mysql-server"],
     }
 }
-class { '::mysql::server':
-  root_password    => 'strongpassword',
-  override_options => { 'mysqld' => { 'max_connections' => '1024' } }
-}
-#class { 'mysql::server': config_hash => { 'root_password' => 'wordpress' } }
-#class { 'mysql::db': { 'mydb':
-#user => 'wordpress',
-#password => 'password',
-#host => 'localhost',
-#grant => ['all'] } }
+class wordpress_db {
 
+  class { '::mysql::server':
+    root_password    => 'strongpassword',
+    override_options => { 'mysqld' => { 'max_connections' => '1024' } }
+  }
+
+  #mysql::db { 'statedb':
+  #  user     => 'admin',
+  #  password => 'secret',
+  #  host     => 'master.puppetlabs.vm',
+  #  sql        => '/tmp/states.sql',
+  #  require => File['/tmp/states.sql'],
+  #}
+
+  #file { "/tmp/states.sql":
+  #  ensure => present,
+  #  source => "puppet:///modules/blogpost/states.sql",
+ # }
+
+  #mysql_user { 'bob@localhost':
+  #  ensure                   => 'present',
+  #  max_connections_per_hour => '60',
+  #  max_queries_per_hour     => '120',
+  #  max_updates_per_hour     => '120',
+ #   max_user_connections     => '10',
+  #}
+
+  #mysql_grant { 'bob@localhost/statedb.states':
+  #  ensure     => 'present',
+  #  options    => ['GRANT'],
+  #  privileges => ['ALL'],
+  #  table      => 'statedbl.states',
+  #  user       => 'bob@localhost',
+  #}
+
+}
 node default {
     include passwd
     include nginx
     include php-fpm
     include mysql
-    include ::mysql::server
+    include wordpress_db
 }
