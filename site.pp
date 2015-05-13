@@ -14,23 +14,23 @@ class nginx {
 	ensure => running,
 	require => Package["nginx"],
     }
-    file { "/etc/nginx/sites-available/wp.example.net":
+    file { "/etc/nginx/sites-available/default":
 	source => "puppet://puppet.server/files/cfg/wp.example.net",
 	mode => 644,
 	require => Package["nginx"],
     }
-    exec { "delete_default":
-    		command => "/bin/rm /etc/nginx/sites-enabled/default",
-    		onlyif => "/bin/cat /etc/nginx/sites-enabled/default",
-    }
-    exec { "make_symlink":
-    		command => "/bin/ln -s /etc/nginx/sites-available/wp.example.net /etc/nginx/sites-enabled/wp.example.net",
-    		onlyif => [ 
-                	"/bin/ln -s /etc/nginx/sites-available/wp.example.net /etc/nginx/sites-enabled/wp.example.net",
-                	"/bin/cat /etc/nginx/sites-enabled/wp.example.net",
-        	],
-    		require => File["/etc/nginx/sites-available/wp.example.net"],
-    }
+    #exec { "delete_default":
+    #		command => "/bin/rm /etc/nginx/sites-enabled/default",
+    #		onlyif => "/bin/cat /etc/nginx/sites-enabled/default",
+    #}
+    #exec { "make_symlink":
+    #		command => "/bin/ln -s /etc/nginx/sites-available/wp.example.net /etc/nginx/sites-enabled/wp.example.net",
+    #		onlyif => [ 
+    #            	"/bin/ln -s /etc/nginx/sites-available/wp.example.net /etc/nginx/sites-enabled/wp.example.net",
+    #            	"/bin/cat /etc/nginx/sites-enabled/wp.example.net",
+    #    	],
+    #		require => File["/etc/nginx/sites-available/wp.example.net"],
+    #}
     file {
     	"/var/www" :
     	ensure => directory,
@@ -95,7 +95,7 @@ class mysql {
     }
 }
 
-class { 'mysql::server': config_hash => { 'root_password' => 'wordpress' } }
+#class { 'mysql::server': config_hash => { 'root_password' => 'wordpress' } }
 #class { 'mysql::db': { 'mydb':
 #user => 'wordpress',
 #password => 'password',
