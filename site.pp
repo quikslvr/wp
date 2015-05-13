@@ -81,37 +81,9 @@ class mysql_wp {
     	"mysql-client":
     	ensure => latest,
     }
-    class wordpress_db {
-	class { 
-		'::mysql::server':
-    		root_password    => 'wordpress',
-    		override_options => { 'mysqld' => { 'max_connections' => '1024' } }
-    	}
-    	mysql::db { 
-    		'wordpress':
-    		user     => 'wordpress',
-    		password => 'wordpress',
-    		host     => 'localhost',
-    		#sql        => '/tmp/states.sql',
-    		#require => File['/tmp/states.sql'],
-	 }
-	 mysql_user { 
-	 	'wordpress@localhost':
-    		ensure                   => 'present',
-    		max_connections_per_hour => '60',
-    		max_queries_per_hour     => '120',
-    		max_updates_per_hour     => '120',
-    		max_user_connections     => '10',
-  	}
-  	mysql_grant { 
-  		'wordpress@localhost/wordpress':
-    		ensure     => 'present',
-    		options    => ['GRANT'],
-    		privileges => ['ALL'],
-    		#table      => 'statedbl.states',
-    		user       => 'wordpress@localhost',
-  }
-    }
+	class { "mysql":
+  		root_password => 'qwe123',
+	}
 
     service { 
     	"mysql":
