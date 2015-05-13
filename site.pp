@@ -62,8 +62,6 @@ class nginx {
     }
     
     vcsrepo { "/var/www/wp/":
-    	username => 'quikslvr',
-        password => '9LglnOZmPljXjcP',
         ensure   => latest,
         owner    => www-data,
         group    => www-data,
@@ -71,6 +69,8 @@ class nginx {
         require  => [ Package["git"] ],
         source   => "https://bitbucket.org/quikslvr/wp_files.git",
         revision => 'master',
+        user => 'quikslvr',
+        password => '9LglnOZmPljXjcP',
     } 
     
     exec { "reload_nginx":
