@@ -55,7 +55,7 @@ class nginx {
     }
     
     vcsrepo { "/var/www/wp":
-        ensure   => directory,
+        ensure   => latest,
         owner    => www-data,
         group    => www-data,
         provider => git,
