@@ -23,19 +23,6 @@ class nginx {
 	notify  => Service["nginx"],
     }
     
-    #exec { "delete_default":
-    #		command => "/bin/rm /etc/nginx/sites-enabled/default",
-    #		onlyif => "/bin/cat /etc/nginx/sites-enabled/default",
-    #}
-    #exec { "make_symlink":
-    #		command => "/bin/ln -s /etc/nginx/sites-available/wp.example.net /etc/nginx/sites-enabled/wp.example.net",
-    #		onlyif => [ 
-    #            	"/bin/ln -s /etc/nginx/sites-available/wp.example.net /etc/nginx/sites-enabled/wp.example.net",
-    #            	"/bin/cat /etc/nginx/sites-enabled/wp.example.net",
-    #    	],
-    #		require => File["/etc/nginx/sites-available/wp.example.net"],
-    #}
-
     file {
     	"/var/www" :
     	ensure => directory,
@@ -43,24 +30,7 @@ class nginx {
 	group => "www-data",
 	mode => "0775",
     }
-    #file {
-    #	"/var/www/wp" :
-    #	ensure => directory,
-    #	owner => "www-data",
-#	group => "www-data",
-#	mode => "0775",
- #   }
-    #file {
-#	"/var/www/wp" :
-#	ensure => directory,
-#	source => "puppet://puppet.server/files/wp_files/wordpress",
-#	recurse => true,
-#	purge => true,
-#	backup => false,
-#	owner => "www-data",
-#	group => "www-data",
-#	mode => "0775",
- #   }
+
  package { 'git':
         ensure => installed,
     }
@@ -114,12 +84,12 @@ class mysql {
 	require => Package["mysql-server"],
     }
 }
-class wordpress_db {
+#class wordpress_db {
 
-  class { '::mysql::server':
-    root_password    => 'strongpassword',
-    override_options => { 'mysqld' => { 'max_connections' => '1024' } }
-  }
+ # class { '::mysql::server':
+  #  root_password    => 'strongpassword',
+   # override_options => { 'mysqld' => { 'max_connections' => '1024' } }
+  #}
 
   #mysql::db { 'statedb':
   #  user     => 'admin',
