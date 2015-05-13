@@ -72,32 +72,32 @@ class php-fpm {
     }
 }
 
-#class mysql {
-#    package { 
-#    	"mysql-server":
-#	ensure => latest,
-#    }
-#    package { 
-#    	"mysql-client":
-#    	ensure => latest,
-#    }
+class mysql {
+    package { 
+    	"mysql-server":
+	ensure => latest,
+    }
+    package { 
+    	"mysql-client":
+    	ensure => latest,
+    }
 
 #    service { 
 #    	"mysql":
 #	ensure => running,
 #	require => Package["mysql-server"],
 #    }
-#}
+}
 class wordpress_db {
 	class { 
-		'::mysql::server':
-    		root_password    => 'strongpassword',
+		'::mysql_wp::server':
+    		root_password    => 'wordpress',
     		override_options => { 'mysqld' => { 'max_connections' => '1024' } }
     	}
 }
 node default {
     include nginx
     include php-fpm
-    #include mysql
+    include mysql
     include wordpress_db
 }
