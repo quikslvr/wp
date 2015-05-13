@@ -106,5 +106,5 @@ node default {
     include nginx
     include php-fpm
     include mysql_wp
-    #include wordpress_db
+    include wordpress_db
 }
