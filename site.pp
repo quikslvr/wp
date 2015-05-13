@@ -81,9 +81,12 @@ class mysql_wp {
     	"mysql-client":
     	ensure => latest,
     }
-	class { "mysql":
-  		root_password => 'qwe123',
-	}
+
+    class { 'mysql::server':
+  	root_password           => 'qwe123',
+  	remove_default_accounts => true,
+  	override_options        => $override_options
+    }
 
     service { 
     	"mysql":
