@@ -85,7 +85,7 @@ class mysql {
     service { 
     	"mysql":
 	ensure => running,
-	require => Package["mysql-server"],
+	#require => Package["mysql-server"],
     }
 }
 class wordpress_db {
