@@ -39,18 +39,31 @@ class nginx {
 	group => "www-data",
 	mode => "0775",
     }
-    file {
-	"/var/www/wp" :
-	ensure => directory,
-	source => "puppet://puppet.server/files/wp_files/wordpress",
-	recurse => true,
-	purge => true,
-	backup => false,
-	owner => "www-data",
-	group => "www-data",
-	mode => "0775",
+    #file {
+#	"/var/www/wp" :
+#	ensure => directory,
+#	source => "puppet://puppet.server/files/wp_files/wordpress",
+#	recurse => true,
+#	purge => true,
+#	backup => false,
+#	owner => "www-data",
+#	group => "www-data",
+#	mode => "0775",
+ #   }
+ package { 'git':
+        ensure => installed,
     }
-
+    
+    vcsrepo { "/var/www/wp":
+        ensure   => latest,
+        owner    => www-data,
+        group    => www-data,
+        provider => git,
+        require  => [ Package["git"] ],
+        source   => "https://quikslvr@bitbucket.org/quikslvr/wp_files.git",
+        revision => 'master',
+    } 
+    
     exec { "reload_nginx":
     		command => "/etc/init.d/nginx reload",
     		require => Package["nginx"],
