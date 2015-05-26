@@ -65,6 +65,10 @@ class php-fpm {
     	"php5-memcache":
 	ensure => latest,
     }
+    package { 
+    	"php5-mysqlnd":
+	ensure => latest,
+    }
     service { 
     	"php5-fpm":
     	ensure => running,
