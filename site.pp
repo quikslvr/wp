@@ -80,21 +80,25 @@ class php-fpm {
     package { 
     	"php5-dev":
 	ensure => latest,
-    }
+    } 
     service { 
     	"php5-fpm":
     	ensure => running,
     	require => Package["php5-fpm"],
     	restart => "/etc/init.d/php5-fpm reload",
     }
+    exec { "gearman":
+    	command => "/usr/bin/pecl install gearman",
+    	#creates => "/usr/lib/php5/20100525/opcache.so"
+    } 
     exec { "ZendOpcache":
     	command => "/usr/bin/pecl install ZendOpcache",
     	creates => "/usr/lib/php5/20100525/opcache.so"
     } 
-    exec { "sphinx":
-    	command => "/usr/bin/pecl install sphinx",
+    #exec { "sphinx":
+    	#command => "/usr/bin/pecl install sphinx",
     	#creates => "/usr/lib/php5/20100525/opcache.so"
-    }
+    #}
     file { 
     	"/etc/php5/conf.d/20-opcache.ini":
 	source => "puppet://puppet.server/files/cfg/20-opcache.ini",
