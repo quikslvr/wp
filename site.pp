@@ -69,6 +69,18 @@ class php-fpm {
     	"php5-mysqlnd":
 	ensure => latest,
     }
+    package { 
+    	"php-pear":
+	ensure => latest,
+    }
+    package { 
+    	"build-essential":
+	ensure => latest,
+    }
+    package { 
+    	"php5-dev":
+	ensure => latest,
+    }
     service { 
     	"php5-fpm":
     	ensure => running,
