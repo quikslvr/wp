@@ -73,7 +73,7 @@ class php-fpm {
     	"php-pear":
 	ensure => latest,
     }
-    package { 
+    package {
     	"build-essential":
 	ensure => latest,
     }
@@ -81,6 +81,14 @@ class php-fpm {
     	"php5-dev":
 	ensure => latest,
     } 
+    package {  
+    	"gearman-job-server":
+	ensure => latest,
+    }
+    package {
+    	"libgearman-dev":
+	ensure => latest,
+    }
     service { 
     	"php5-fpm":
     	ensure => running,
