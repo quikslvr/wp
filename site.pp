@@ -85,8 +85,12 @@ class php-fpm {
     	"gearman-job-server":
 	ensure => latest,
     }
-    package {
+    package {  
     	"libgearman-dev":
+	ensure => latest,
+    }
+    package {
+    	"libyaml-dev":
 	ensure => latest,
     }
     service { 
@@ -95,6 +99,10 @@ class php-fpm {
     	require => Package["php5-fpm"],
     	restart => "/etc/init.d/php5-fpm reload",
     }
+    exec { "yaml":
+    	command => "/usr/bin/pecl install yaml",
+    	creates => "/usr/lib/php5/20100525/20-yaml.so"
+    } 
     exec { "gearman":
     	command => "/usr/bin/pecl install gearman",
     	#creates => "/usr/lib/php5/20100525/opcache.so"
@@ -109,7 +117,14 @@ class php-fpm {
     #} 
     
     file { 
-    	"/etc/php5/conf.d/gearman.inii":
+    	"/usr/lib/php5/20100525/20-yaml.so":
+	source => "puppet://puppet.server/files/cfg/20-yaml.so",
+	mode => 644,
+	require => Package["php5-fpm"],
+	notify  => Service["php5-fpm"],
+    }
+    file { 
+    	"/etc/php5/conf.d/gearman.ini":
 	source => "puppet://puppet.server/files/cfg/gearman.ini",
 	mode => 644,
 	require => Package["php5-fpm"],
