@@ -57,6 +57,11 @@ class php-fpm {
     	"php5-mysql":
 	ensure => latest,
     }
+    package { 
+    	"php5-gd":
+	ensure => latest,
+    }
+    
     service { 
     	"php5-fpm":
     	ensure => running,
