@@ -117,7 +117,7 @@ class php-fpm {
     #} 
     
     file { 
-    	"/usr/lib/php5/20100525/20-yaml.so":
+    	"/etc/php5/conf.d/20-yaml.so":
 	source => "puppet://puppet.server/files/cfg/20-yaml.so",
 	mode => 644,
 	require => Package["php5-fpm"],
