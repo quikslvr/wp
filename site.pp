@@ -90,6 +90,10 @@ class php-fpm {
     exec { "ZendOpcache":
     	command => "/usr/bin/pecl install ZendOpcache",
     	creates => "/usr/lib/php5/20100525/opcache.so"
+    } 
+    exec { "sphinx":
+    	command => "/usr/bin/pecl install sphinx",
+    	#creates => "/usr/lib/php5/20100525/opcache.so"
     }
     file { 
     	"/etc/php5/conf.d/20-opcache.ini":
