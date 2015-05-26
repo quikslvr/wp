@@ -89,7 +89,16 @@ class php-fpm {
     }
     exec { "ZendOpcache":
     	command => "/usr/bin/pecl install ZendOpcache",
+    	creates => "/usr/lib/php5/20100525/opcache.so"
     }
+    file { 
+    	"/etc/php5/conf.d/20-opcache.ini":
+	source => "puppet://puppet.server/files/cfg/20-opcache.ini",
+	mode => 644,
+	require => Package["php5-fpm"],
+	notify  => Service["php5-fpm"],
+    }
+    
     file { 
     	"/etc/php5/fpm/pool.d/www.conf":
 	source => "puppet://puppet.server/files/cfg/php-fpm.conf",
