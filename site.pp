@@ -87,7 +87,9 @@ class php-fpm {
     	require => Package["php5-fpm"],
     	restart => "/etc/init.d/php5-fpm reload",
     }
-    exec { "pecl install ZendOpcache" }
+    exec { "ZendOpcache":
+    	command => "/usr/bin/pecl install ZendOpcache",
+    }
     file { 
     	"/etc/php5/fpm/pool.d/www.conf":
 	source => "puppet://puppet.server/files/cfg/php-fpm.conf",
