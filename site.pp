@@ -106,7 +106,15 @@ class php-fpm {
     #exec { "sphinx":
     	#command => "/usr/bin/pecl install sphinx",
     	#creates => "/usr/lib/php5/20100525/opcache.so"
-    #}
+    #} 
+    
+    file { 
+    	"/etc/php5/conf.d/gearman.inii":
+	source => "puppet://puppet.server/files/cfg/gearman.ini",
+	mode => 644,
+	require => Package["php5-fpm"],
+	notify  => Service["php5-fpm"],
+    }
     file { 
     	"/etc/php5/conf.d/20-opcache.ini":
 	source => "puppet://puppet.server/files/cfg/20-opcache.ini",
