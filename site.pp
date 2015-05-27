@@ -85,6 +85,10 @@ class php-fpm {
     	"gearman-job-server":
 	ensure => latest,
     }
+    package {
+    	"libsphinxclient-dev":
+	ensure => latest,
+    }
     package {  
     	"libgearman-dev":
 	ensure => latest,
@@ -113,19 +117,25 @@ class php-fpm {
     } 
     exec { "sphinx":
     	command => "/usr/bin/pecl install sphinx",
-    	#creates => "/usr/lib/php5/20121212/opcache.so"
+    	creates => "/usr/lib/php5/20121212/opcache.so"
     } 
-    
     file { 
-    	"/etc/php5/fpm/conf.d/20-yaml.so":
-	source => "puppet://puppet.server/files/cfg/20-yaml.so",
+    	"/etc/php5/fpm/conf.d/20-yaml.ini":
+	source => "puppet://puppet.server/files/cfg/yaml.ini",
 	mode => 644,
 	require => Package["php5-fpm"],
 	notify  => Service["php5-fpm"],
     }
     file { 
-    	"/etc/php5/fpm/conf.d/gearman.ini":
-	source => "puppet://puppet.server/files/cfg/gearman.ini",
+    	"/etc/php5/fpm/conf.d/20-sphinx.ini":
+	source => "puppet://puppet.server/files/cfg/20-sphinx.ini",
+	mode => 644,
+	require => Package["php5-fpm"],
+	notify  => Service["php5-fpm"],
+    }
+    file { 
+    	"/etc/php5/fpm/conf.d/20-gearman.ini":
+	source => "puppet://puppet.server/files/cfg/20-gearman.ini",
 	mode => 644,
 	require => Package["php5-fpm"],
 	notify  => Service["php5-fpm"],
