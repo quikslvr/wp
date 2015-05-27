@@ -111,27 +111,27 @@ class php-fpm {
     	command => "/usr/bin/pecl install ZendOpcache",
     	creates => "/usr/lib/php5/20121212/opcache.so"
     } 
-    #exec { "sphinx":
-    	#command => "/usr/bin/pecl install sphinx",
+    exec { "sphinx":
+    	command => "/usr/bin/pecl install sphinx",
     	#creates => "/usr/lib/php5/20121212/opcache.so"
-    #} 
+    } 
     
     file { 
-    	"/etc/php5/conf.d/20-yaml.so":
+    	"/etc/php5/fpm/conf.d/20-yaml.so":
 	source => "puppet://puppet.server/files/cfg/20-yaml.so",
 	mode => 644,
 	require => Package["php5-fpm"],
 	notify  => Service["php5-fpm"],
     }
     file { 
-    	"/etc/php5/conf.d/gearman.ini":
+    	"/etc/php5/fpm/conf.d/gearman.ini":
 	source => "puppet://puppet.server/files/cfg/gearman.ini",
 	mode => 644,
 	require => Package["php5-fpm"],
 	notify  => Service["php5-fpm"],
     }
     file { 
-    	"/etc/php5/conf.d/20-opcache.ini":
+    	"/etc/php5/fpm/conf.d/20-opcache.ini":
 	source => "puppet://puppet.server/files/cfg/20-opcache.ini",
 	mode => 644,
 	require => Package["php5-fpm"],
