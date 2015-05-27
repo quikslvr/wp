@@ -98,54 +98,58 @@ class php-fpm {
 	ensure => latest,
     }
     service { 
-    	"php5-fpm":
+    	"php-fpm":
     	ensure => running,
     	require => Package["php5-fpm"],
     	restart => "/etc/init.d/php5-fpm reload",
     }
     exec { "yaml":
     	command => "/usr/bin/pecl install yaml",
-    	creates => "/usr/lib/php5/20121212/yaml.so"
+    	creates => "/usr/lib/php5/20121212/yaml.so",
+    	require => Package["php-pear"],
     } 
     exec { "gearman":
     	command => "/usr/bin/pecl install gearman",
-    	creates => "/usr/lib/php5/20121212/gearman.so"
+    	creates => "/usr/lib/php5/20121212/gearman.so",
+    	require => Package["php-pear"],
     } 
     exec { "ZendOpcache":
     	command => "/usr/bin/pecl install ZendOpcache",
-    	creates => "/usr/lib/php5/20121212/opcache.so"
+    	creates => "/usr/lib/php5/20121212/opcache.so",
+    	require => Package["php-pear"],
     } 
     exec { "sphinx":
     	command => "/usr/bin/pecl install sphinx",
-    	creates => "/usr/lib/php5/20121212/sphinx.so"
+    	creates => "/usr/lib/php5/20121212/sphinx.so",
+    	require => Package["php-pear"],
     } 
     file { 
     	"/etc/php5/fpm/conf.d/20-yaml.ini":
 	source => "puppet://puppet.server/files/cfg/20-yaml.ini",
 	mode => 644,
 	require => Package["php5-fpm"],
-	notify  => Service["php5-fpm"],
+	notify  => Service["php-fpm"],
     }
     file { 
     	"/etc/php5/fpm/conf.d/20-sphinx.ini":
 	source => "puppet://puppet.server/files/cfg/20-sphinx.ini",
 	mode => 644,
 	require => Package["php5-fpm"],
-	notify  => Service["php5-fpm"],
+	notify  => Service["php-fpm"],
     }
     file { 
     	"/etc/php5/fpm/conf.d/20-gearman.ini":
 	source => "puppet://puppet.server/files/cfg/20-gearman.ini",
 	mode => 644,
 	require => Package["php5-fpm"],
-	notify  => Service["php5-fpm"],
+	notify  => Service["php-fpm"],
     }
     file { 
     	"/etc/php5/fpm/conf.d/20-opcache.ini":
 	source => "puppet://puppet.server/files/cfg/20-opcache.ini",
 	mode => 644,
 	require => Package["php5-fpm"],
-	notify  => Service["php5-fpm"],
+	notify  => Service["php-fpm"],
     }
     
     file { 
@@ -153,7 +157,7 @@ class php-fpm {
 	source => "puppet://puppet.server/files/cfg/php-fpm.conf",
 	mode => 644,
 	require => Package["php5-fpm"],
-	notify  => Service["php5-fpm"],
+	notify  => Service["php-fpm"],
     }
 }
 
