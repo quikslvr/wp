@@ -105,11 +105,11 @@ class php-fpm {
     }
     exec { "yaml":
     	command => "/usr/bin/pecl install yaml",
-    	creates => "/usr/lib/php5/20121212/20-yaml.so"
+    	creates => "/usr/lib/php5/20121212/yaml.so"
     } 
     exec { "gearman":
     	command => "/usr/bin/pecl install gearman",
-    	#creates => "/usr/lib/php5/20121212/opcache.so"
+    	creates => "/usr/lib/php5/20121212/gearman.so"
     } 
     exec { "ZendOpcache":
     	command => "/usr/bin/pecl install ZendOpcache",
@@ -117,11 +117,11 @@ class php-fpm {
     } 
     exec { "sphinx":
     	command => "/usr/bin/pecl install sphinx",
-    	creates => "/usr/lib/php5/20121212/opcache.so"
+    	creates => "/usr/lib/php5/20121212/sphinx.so"
     } 
     file { 
     	"/etc/php5/fpm/conf.d/20-yaml.ini":
-	source => "puppet://puppet.server/files/cfg/yaml.ini",
+	source => "puppet://puppet.server/files/cfg/20-yaml.ini",
 	mode => 644,
 	require => Package["php5-fpm"],
 	notify  => Service["php5-fpm"],
