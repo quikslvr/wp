@@ -101,19 +101,19 @@ class php-fpm {
     }
     exec { "yaml":
     	command => "/usr/bin/pecl install yaml",
-    	creates => "/usr/lib/php5/20100525/20-yaml.so"
+    	creates => "/usr/lib/php5/20121212/20-yaml.so"
     } 
     exec { "gearman":
     	command => "/usr/bin/pecl install gearman",
-    	#creates => "/usr/lib/php5/20100525/opcache.so"
+    	#creates => "/usr/lib/php5/20121212/opcache.so"
     } 
     exec { "ZendOpcache":
     	command => "/usr/bin/pecl install ZendOpcache",
-    	creates => "/usr/lib/php5/20100525/opcache.so"
+    	creates => "/usr/lib/php5/20121212/opcache.so"
     } 
     #exec { "sphinx":
     	#command => "/usr/bin/pecl install sphinx",
-    	#creates => "/usr/lib/php5/20100525/opcache.so"
+    	#creates => "/usr/lib/php5/20121212/opcache.so"
     #} 
     
     file { 
